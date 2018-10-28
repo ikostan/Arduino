@@ -8,6 +8,8 @@ const int sleepTime = 1000;
 void setup() {
   // put your setup code here, to run once:
 
+  Serial.begin(baudSpeed);
+  Serial.println(lessonName);
 }
 
 void loop() {
