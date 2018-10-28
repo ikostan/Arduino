@@ -23,9 +23,11 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   personName = getName();
-  sayHello(personName);
+  personAge = getAge();
+  sayHello(personName, personAge, personHeight);
 }
 
+//Get user name
 String getName(){
 
   Serial.println(askForName);
@@ -40,7 +42,21 @@ String getName(){
   return name;
 }
 
-void sayHello(String personName){
+//Get user age
+int getAge(){
 
-  Serial.println("Hello " + personName + ". It is nice to meet you.");
+  Serial.println(askForAge);
+
+  while(Serial.available() == 0){
+    //Do nothing and wait for input  
+  }
+  
+  return Serial.parseInt();
+}
+
+//Say hello to a new user
+void sayHello(String personName, int personAge, float personHeight){
+
+  Serial.println("\nHello " + personName + ". It is nice to meet you.");
+  Serial.println("You are " + String(personAge) + " years old.");
 }
