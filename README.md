@@ -7,13 +7,17 @@ http://www.toptechboy.com/arduino/les...
 
 ## List of content:
 
-#### Arduino Lesson 1: #### In this lesson we take our first look at the Arduino Microcontroller, and you will write your first simple program. Don’t be afraid, we will take you through it step by step with a video and instructional diagrams.
+#### Arduino Lesson 1: 
+In this lesson we take our first look at the Arduino Microcontroller, and you will write your first simple program. Don’t be afraid, we will take you through it step by step with a video and instructional diagrams.
 
-#### Arduino Lesson 2: #### In this lesson we build our first external circuit and control it from the Arduino. We use digitalWrite commands to turn the arduino on and off.
+#### Arduino Lesson 2: 
+In this lesson we build our first external circuit and control it from the Arduino. We use digitalWrite commands to turn the arduino on and off.
 
-#### Arduino Lesson 3: #### In this lesson we create a two LED circuit, and we learn about for loops.
+#### Arduino Lesson 3: 
+In this lesson we create a two LED circuit, and we learn about for loops.
 
-#### Arduino Lesson 4: #### Learn how to print to your computer screen from the Arduino using your serial port. Good Stuff!
+#### Arduino Lesson 4: 
+Learn how to print to your computer screen from the Arduino using your serial port. Good Stuff!
 
 Arduino Lesson 5: Learn how to work with strings in arduino. This is a simple but important lesson
 
