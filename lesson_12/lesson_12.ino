@@ -22,15 +22,23 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  personName = getName();
+  personName = getName(false);
+  //In order to avoid empty names we will check the length 
+  while(personName.length() <= 1){
+    
+    personName = getName(true);
+  }
+  
   personAge = getAge();
   sayHello(personName, personAge, personHeight);
 }
 
 //Get user name
-String getName(){
+String getName(bool isInvalidName){
 
-  Serial.println(askForName);
+  if(isInvalidName == false){
+    Serial.println(askForName);
+  }
 
   while(Serial.available() == 0){
     //Do nothing and wait for input  
