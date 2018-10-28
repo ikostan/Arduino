@@ -47,25 +47,21 @@ void testRgb(){
   //RGB
   Serial.println("RGB is on");
   turnOnAllLed();
-  delay(sleepTime);
   turnOffAllLed();
 
   //RB
   Serial.println("RB is on");
   turnOnRB();
-  delay(sleepTime);
   turnOffAllLed();
 
   //GB
   Serial.println("GB is on");
   turnOnBG();
-  delay(sleepTime);
   turnOffAllLed();
 
   //RG
   Serial.println("RG is on");
   turnOnRG();
-  delay(sleepTime);
   turnOffAllLed();
 }
 
@@ -91,6 +87,7 @@ void turnOnAllLed(){
   analogWrite(pinBlue, ledBrightness);
   analogWrite(pinGreen, ledBrightness);
   analogWrite(pinRed, ledBrightness);
+  delay(sleepTime);
 }
 
 //Turn on RG
@@ -99,8 +96,8 @@ void turnOnRG(){
   analogWrite(pinBlue, 150);
   analogWrite(pinGreen, 0);
   analogWrite(pinRed, 150);
+  delay(sleepTime);
 }
-
 
 //Turn on RB
 void turnOnRB(){
@@ -108,6 +105,7 @@ void turnOnRB(){
   analogWrite(pinBlue, 150);
   analogWrite(pinGreen, 0);
   analogWrite(pinRed, 150);
+  delay(sleepTime);
 }
 
 //Turn on BG
@@ -116,6 +114,7 @@ void turnOnBG(){
   analogWrite(pinBlue, 150);
   analogWrite(pinGreen, 150);
   analogWrite(pinRed, 0);
+  delay(sleepTime);
 }
 
 //Set-up analog pins
