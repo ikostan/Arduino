@@ -33,24 +33,15 @@ void loop() {
 void testRgb(){
 
   //Blue
-  Serial.println("Blue is on");
-  analogWrite(pinBlue, ledBrightness);
-  delay(sleepTime);
-  //analogWrite(pinBlue, ledOff);
+  turnOnLed("Blue is on", pinBlue, ledBrightness);
   turnOffAllLed();
 
   //Green
-  Serial.println("Green is on");
-  analogWrite(pinGreen, ledBrightness);
-  delay(sleepTime);
-  //analogWrite(pinGreen, ledOff);
+  turnOnLed("Green is on", pinGreen, ledBrightness);
   turnOffAllLed();
 
   //Red
-  Serial.println("Red is on");
-  analogWrite(pinRed, ledBrightness);
-  delay(sleepTime);
-  //analogWrite(pinRed, ledOff);
+  turnOnLed("Red is on", pinRed, ledBrightness);
   turnOffAllLed();
 
   //RGB
@@ -58,6 +49,14 @@ void testRgb(){
   turnOnAllLed();
   delay(sleepTime);
   turnOffAllLed();
+}
+
+//Turn on LED
+void turnOnLed(String logMessage, int pinNumber, int ledBrightness){
+
+  Serial.println(logMessage);
+  analogWrite(pinNumber, ledBrightness);
+  delay(sleepTime);
 }
 
 //Turn off all LEDs
