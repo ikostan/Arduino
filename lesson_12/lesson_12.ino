@@ -86,7 +86,7 @@ float getHeight(bool isInvalidName){
   return Serial.parseFloat(); //Get user input from the serial port and return it
 }
 
-//Say hello to a new user
+//Say hello to a new user (list all user data)
 void sayHello(String personName, int personAge, float personHeight){
 
   Serial.println("\nHello " + personName + ". It is nice to meet you.");
