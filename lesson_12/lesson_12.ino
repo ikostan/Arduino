@@ -4,7 +4,7 @@ const String lessonName = "LESSON 12: \nSimple and Easy Way to Read Strings Floa
 const int baudSpeed = 9600;
 const String askForName = "\nWhat is your name?";
 const String askForAge = "\nHow old are you?";
-const String askForHeight = "\nHow toll are you (in meters)?";
+const String askForHeight = "\nHow tall are you (in meters)?";
 const int sleepTime = 1000;
 
 //Variables:
@@ -91,5 +91,5 @@ void sayHello(String personName, int personAge, float personHeight){
 
   Serial.println("\nHello " + personName + ". It is nice to meet you.");
   Serial.println("You are " + String(personAge) + " years old.");
-  Serial.println("You are " + String(personHeight) + " meters toll.");
+  Serial.println("You are " + String(personHeight) + " meters tall.");
 }
