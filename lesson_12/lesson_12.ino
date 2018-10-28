@@ -2,6 +2,13 @@
 
 const String lessonName = "LESSON 12: \nSimple and Easy Way to Read Strings Floats and Ints over Arduino Serial Port";
 const int baudSpeed = 9600;
+const String askForName = "\nWhat is your name?\n";
+const String askForAge = "How old are you?";
+const int sleepTime = 1000;
+
+//Variables:
+String personName;
+int personAge;
 
 
 void setup() {
@@ -14,4 +21,25 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  personName = getName();
+  sayHello(personName);
+}
+
+String getName(){
+
+  Serial.println(askForName);
+
+  while(Serial.available() == 0){
+    //Do nothing and wait for input  
+  }
+  
+  String name = Serial.readString();
+  name.trim();
+  
+  return name;
+}
+
+void sayHello(String personName){
+
+  Serial.println("Hello " + personName + ". It is nice to meet you.");
 }
