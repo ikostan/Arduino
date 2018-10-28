@@ -1,7 +1,6 @@
 //Source: https://www.youtube.com/watch?v=d8_xXNcGYgo&index=1&list=PLGs0VKk2DiYx6CMdOQR_hmJ2NbB4mZQn-
 //LESSON 1: Simple Introduction to the Arduino
 
-
 //Global variables
 int LEDpin = 13; //Create a variable and assign a pin number to it
 int waitTimeOn = 100; //Waiting time in milli-sec
