@@ -2,8 +2,9 @@
 
 const String lessonName = "LESSON 12: \nSimple and Easy Way to Read Strings Floats and Ints over Arduino Serial Port";
 const int baudSpeed = 9600;
-const String askForName = "\nWhat is your name?\n";
-const String askForAge = "How old are you?";
+const String askForName = "\nWhat is your name?";
+const String askForAge = "\nHow old are you?";
+const String askForHeight = "\nHow toll are you (in meters)?";
 const int sleepTime = 1000;
 
 //Variables:
@@ -23,13 +24,22 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   personName = getName(false);
+  
   //In order to avoid empty names we will check the length 
   while(personName.length() <= 1){
     
-    personName = getName(true);
+    personName = getName(true); //Get user input from the serial port
   }
   
   personAge = getAge();
+
+  personHeight = getHeight(false);
+  //In order to avoid 0.00 we will check the imput
+  while(personHeight == 0){
+    
+    personHeight = getHeight(true); //Get user input from the serial port
+  }
+  
   sayHello(personName, personAge, personHeight);
 }
 
@@ -45,7 +55,7 @@ String getName(bool isInvalidName){
   }
   
   String name = Serial.readString();
-  name.trim();
+  name.trim(); //Clean the string from spaces
   
   return name;
 }
@@ -59,7 +69,21 @@ int getAge(){
     //Do nothing and wait for input  
   }
   
-  return Serial.parseInt();
+  return Serial.parseInt(); //Get user input from the serial port and return it
+}
+
+//Get user height
+float getHeight(bool isInvalidName){
+
+  if(isInvalidName == false){
+    Serial.println(askForHeight);
+  }
+
+  while(Serial.available() == 0){
+    //Do nothing and wait for input  
+  }
+  
+  return Serial.parseFloat(); //Get user input from the serial port and return it
 }
 
 //Say hello to a new user
@@ -67,4 +91,5 @@ void sayHello(String personName, int personAge, float personHeight){
 
   Serial.println("\nHello " + personName + ". It is nice to meet you.");
   Serial.println("You are " + String(personAge) + " years old.");
+  Serial.println("You are " + String(personHeight) + " meters toll.");
 }
