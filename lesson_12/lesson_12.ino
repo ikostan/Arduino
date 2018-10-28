@@ -7,14 +7,15 @@ const String askForAge = "How old are you?";
 const int sleepTime = 1000;
 
 //Variables:
-String personName;
-int personAge;
+String personName; //Holds persons name
+int personAge;  //Holds persons age
+float personHeight; //Holds persons height
 
 
 void setup() {
   // put your setup code here, to run once:
 
-  Serial.begin(baudSpeed);
+  Serial.begin(baudSpeed); //Turn on serial port at 9600 baud
   Serial.println(lessonName);
 }
 
