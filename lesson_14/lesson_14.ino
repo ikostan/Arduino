@@ -2,7 +2,7 @@
 
 const String lessonName = "LESSON 14: Arduino If Statements and Conditionals";
 const int baudSpeed = 9600;
-const String askForColor = "\nPlease enter the color ('R' for red, 'G' for green, 'B' for blue, '0' to turn off):";
+const String askForColor = "\nPlease enter your color choice ('R' for red, 'G' for green, 'B' for blue, '0' to turn off):";
 const String invalidInput = "\nERROR: invalid input. Please re-enter.";
 const int ledBrightness = 100; //MIN is 0, MAX is 255
 const int ledOff = 0; //MIN is 0, MAX is 255
@@ -27,14 +27,14 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  Serial.println(askForColor);
+  Serial.println(askForColor); //Prompting user for input
 
   while(Serial.available() == 0){
     //Do nothing and wait for user input  
   }
 
   userInput = Serial.readString();
-  userInput.trim(); //Clean all white spaces
+  userInput.trim(); //Clear all white spaces
 
   if(userInput.equals("R") || userInput.equals("r")){
     //RED
