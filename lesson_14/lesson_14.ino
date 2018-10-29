@@ -4,6 +4,8 @@ const String lessonName = "LESSON 14: Arduino If Statements and Conditionals";
 const int baudSpeed = 9600;
 const int sleepTime = 1000;
 const int shortSleepTime = 500;
+const String askForColor = "\nPlease enter the color ('R' for red, 'G' for green, 'B' for blue, '0' to turn off):";
+const String invalidInput = "\nERROR: invalid input. Please re-enter.";
 
 const int ledBrightness = 100; //MIN is 0, MAX is 255
 const int ledOff = 0; //MIN is 0, MAX is 255
@@ -14,6 +16,9 @@ const int ledFullBrightness = 255; //MIN is 0, MAX is 255
 const int pinBlue = 6;
 const int pinGreen = 10;
 const int pinRed = 11;
+
+//User input
+String userInput;
 
 void setup() {
   // put your setup code here, to run once:
@@ -26,43 +31,38 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-  testRgb();
-}
+  Serial.println(askForColor);
 
-//Test function - changing RGB colors
-void testRgb(){
+  while(Serial.available() == 0){
+    //Do nothing and wait for user input  
+  }
 
-  //Blue
-  turnOnLed("Blue is on", pinBlue, ledBrightness);
-  turnOffAllLed();
+  userInput = Serial.readString();
+  userInput.trim();
 
-  //Green
-  turnOnLed("Green is on", pinGreen, ledBrightness);
-  turnOffAllLed();
-
-  //Red
-  turnOnLed("Red is on", pinRed, ledBrightness);
-  turnOffAllLed();
-
-  //RGB
-  Serial.println("RGB is on");
-  turnOnAllLed();
-  turnOffAllLed();
-
-  //RB
-  Serial.println("RB is on");
-  turnOnRB();
-  turnOffAllLed();
-
-  //GB
-  Serial.println("GB is on");
-  turnOnBG();
-  turnOffAllLed();
-
-  //RG
-  Serial.println("RG is on");
-  turnOnRG();
-  turnOffAllLed();
+  if(userInput.equals("R") || userInput.equals("r")){
+    //RED
+    turnOffAllLed();
+    turnOnLed("Red is on", pinRed, ledBrightness);
+  }
+  else if(userInput.equals("G") || userInput.equals("g")){
+    //GREEN
+    turnOffAllLed();
+    turnOnLed("Green is on", pinGreen, ledBrightness);
+  }
+  else if(userInput.equals("B") || userInput.equals("b")){
+    //BLUE
+    turnOffAllLed();
+    turnOnLed("Blue is on", pinBlue, ledBrightness);
+  }
+  else if(userInput.equals("0")){
+    //BLUE
+    turnOffAllLed();
+  }
+  else{
+    //Error
+    Serial.println(invalidInput);
+  }
 }
 
 //Turn on LED
@@ -70,7 +70,7 @@ void turnOnLed(String logMessage, int pinNumber, int ledBrightness){
 
   Serial.println(logMessage);
   analogWrite(pinNumber, ledBrightness);
-  delay(sleepTime);
+  //delay(sleepTime);
 }
 
 //Turn off all LEDs
@@ -79,42 +79,6 @@ void turnOffAllLed(){
   analogWrite(pinBlue, ledOff);
   analogWrite(pinGreen, ledOff);
   analogWrite(pinRed, ledOff);
-}
-
-//Turn off all LEDs
-void turnOnAllLed(){
-
-  analogWrite(pinBlue, ledBrightness);
-  analogWrite(pinGreen, ledBrightness);
-  analogWrite(pinRed, ledBrightness);
-  delay(sleepTime);
-}
-
-//Turn on RG
-void turnOnRG(){
-
-  analogWrite(pinBlue, 150);
-  analogWrite(pinGreen, 0);
-  analogWrite(pinRed, 150);
-  delay(sleepTime);
-}
-
-//Turn on RB
-void turnOnRB(){
-
-  analogWrite(pinBlue, 150);
-  analogWrite(pinGreen, 0);
-  analogWrite(pinRed, 150);
-  delay(sleepTime);
-}
-
-//Turn on BG
-void turnOnBG(){
-
-  analogWrite(pinBlue, 150);
-  analogWrite(pinGreen, 150);
-  analogWrite(pinRed, 0);
-  delay(sleepTime);
 }
 
 //Set-up analog pins
