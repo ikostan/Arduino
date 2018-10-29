@@ -2,15 +2,11 @@
 
 const String lessonName = "LESSON 14: Arduino If Statements and Conditionals";
 const int baudSpeed = 9600;
-const int sleepTime = 1000;
-const int shortSleepTime = 500;
 const String askForColor = "\nPlease enter the color ('R' for red, 'G' for green, 'B' for blue, '0' to turn off):";
 const String invalidInput = "\nERROR: invalid input. Please re-enter.";
-
 const int ledBrightness = 100; //MIN is 0, MAX is 255
 const int ledOff = 0; //MIN is 0, MAX is 255
 const int ledFullBrightness = 255; //MIN is 0, MAX is 255
-
 
 //Pins
 const int pinBlue = 6;
@@ -70,7 +66,6 @@ void turnOnLed(String logMessage, int pinNumber, int ledBrightness){
 
   Serial.println(logMessage);
   analogWrite(pinNumber, ledBrightness);
-  //delay(sleepTime);
 }
 
 //Turn off all LEDs
