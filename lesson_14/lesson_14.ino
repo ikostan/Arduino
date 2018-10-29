@@ -38,7 +38,7 @@ void loop() {
   }
 
   userInput = Serial.readString();
-  userInput.trim();
+  userInput.trim(); //Clean all white spaces
 
   if(userInput.equals("R") || userInput.equals("r")){
     //RED
@@ -56,7 +56,7 @@ void loop() {
     turnOnLed("Blue is on", pinBlue, ledBrightness);
   }
   else if(userInput.equals("0")){
-    //BLUE
+    //Turn off
     turnOffAllLed();
   }
   else{
