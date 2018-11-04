@@ -5,7 +5,8 @@
 const String lessonName = "LESSON 16: Controlling a Servo with Arduino";
 const int baudSpeed = 9600;
 const int waitTime = 25; //Wait time in ms
-const float convertionRate = 204.6; // 1023 devided by 5
+const float convertionRateToVolts = 204.6; // 1023 devided by 5
+const float convertionRate = 5.68; // 1023 devided by 180
 
 //Pins
 const int servoControlPin = 9; //Servo controlling pin
@@ -31,6 +32,7 @@ const String invalidInput = "ERROR: invalid input. Pleaase reenter.";
 int currentRate; //Potentiometer is reading the voltage between 0 and 1023.
 float voltage;
 String prePosition;
+int previousServoPosition = 0; //previous servo position
 int servoPosition = 0; //Servo position variable
 
 //Ojects
@@ -53,6 +55,8 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  
+
   /*
   loopingServo();
   */
@@ -61,12 +65,13 @@ void loop() {
   manualControl();
   */
   
-  /*
+
   currentRate = analogRead(potentiometerAnalogPin); //Reading from potentiometer
-  voltage = currentRate / convertionRate; //Convert input from potentiometer in to VOLTS
-  Serial.println(potentiometerValue + String(currentRate) + ". " + voltageValue + String(voltage) + "."); //Logs
+  //voltage = currentRate / convertionRateToVolts; //Convert input from potentiometer in to VOLTS
+  //Serial.println(potentiometerValue + String(currentRate) + ". " + voltageValue + String(voltage) + "."); //Logs
+  potentiometerControl(currentRate);
   delay(waitTime); //Delay
-  */
+
 }
 
 //Turn servo from Min to Max and vice versa
@@ -138,4 +143,43 @@ void manualControl(){
    }
 
   delay(waitTime); //Delay
+}
+
+//Control servo manualy
+void potentiometerControl(int currentRate){
+
+  //Get servo position
+  servoPosition = currentRate / convertionRate;
+  //Serial.println("servoPosition: " + String(servoPosition));
+
+  //Set servo position
+  if(servoPosition >= minTurn && servoPosition <= maxTurn){
+
+    //Log:
+
+    if(previousServoPosition > servoPosition){
+
+      //Down
+      Serial.println(turnLeft);
+    }
+    else if(previousServoPosition < servoPosition){
+
+      //Up
+      Serial.println(turnRight);
+    }
+    else{
+
+      //No movement
+      Serial.println();
+    }
+        
+    //Set servo position
+    servoObj.write(servoPosition);
+   }
+   else{
+    //Error
+    Serial.println(invalidInput);
+   }
+
+   previousServoPosition = servoPosition;
 }
