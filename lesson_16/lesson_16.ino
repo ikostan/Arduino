@@ -1,12 +1,10 @@
 //Source:  https://www.youtube.com/watch?v=fE4m7TyLd8M
 
-//Potentiometer is reading the voltage between 0 and 1023.
-
 #include <Servo.h> //Loading the servo library
 
 const String lessonName = "LESSON 16: Controlling a Servo with Arduino";
 const int baudSpeed = 9600;
-const int waitTime = 250; //Wait time in ms
+const int waitTime = 25; //Wait time in ms
 const float convertionRate = 204.6; // 1023 devided by 5
 
 //Pins
@@ -20,8 +18,9 @@ const String potentiometerValue = "Potentiometer: ";
 const String voltageValue = "Voltage: ";
 
 //Variables
-int currentRate;
+int currentRate; //Potentiometer is reading the voltage between 0 and 1023.
 float voltage;
+int servoPosition = 0; //Servo position variable
 
 //Setup
 void setup() {
