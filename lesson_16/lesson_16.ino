@@ -27,8 +27,8 @@ void setup() {
 
   Serial.begin(baudSpeed); //Sets the data rate in bits per second (baud) for serial data transmission
   Serial.println(lessonName);
-  pinMode(potentiometerAnalogPin, INPUT); // set analog pin A0
-  pinMode(servoControlPin, OUTPUT);
+  pinMode(potentiometerAnalogPin, INPUT); // Set analog pin A0 for potentiometer
+  pinMode(servoControlPin, OUTPUT); // set digital pin 9 for servo
 }
 
 //Main loop
@@ -37,6 +37,6 @@ void loop() {
 
   currentRate = analogRead(potentiometerAnalogPin); //Reading from potentiometer
   voltage = currentRate / convertionRate; //Convert input from potentiometer in to VOLTS
-  Serial.println(potentiometerValue + String(currentRate) + ". " + voltageValue + String(voltage) + ".");
-  delay(waitTime);
+  Serial.println(potentiometerValue + String(currentRate) + ". " + voltageValue + String(voltage) + "."); //Logs
+  delay(waitTime); //Delay
 }
