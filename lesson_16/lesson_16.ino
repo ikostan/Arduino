@@ -2,6 +2,8 @@
 
 //Potentiometer is reading the voltage between 0 and 1023.
 
+#include <Servo.h> //Loading the servo library
+
 const String lessonName = "LESSON 16: Controlling a Servo with Arduino";
 const int baudSpeed = 9600;
 const int waitTime = 250; //Wait time in ms
