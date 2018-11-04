@@ -5,6 +5,8 @@ const int baudSpeed = 9600;
 
 
 //Pins
+const int servoControl = 9; //Servo controlling pin
+const int potentiometerAnalogPin = A0; //Potentiometer reading pin
 
 
 void setup() {
