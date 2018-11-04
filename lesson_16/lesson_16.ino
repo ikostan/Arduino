@@ -30,6 +30,7 @@ const String invalidInput = "ERROR: invalid input. Pleaase reenter.";
 
 //Variables
 int currentRate; //Potentiometer is reading the voltage between 0 and 1023.
+int previousCurrentRate = 0; 
 float voltage;
 String prePosition;
 int previousServoPosition = 0; //previous servo position
@@ -69,9 +70,21 @@ void loop() {
   currentRate = analogRead(potentiometerAnalogPin); //Reading from potentiometer
   //voltage = currentRate / convertionRateToVolts; //Convert input from potentiometer in to VOLTS
   //Serial.println(potentiometerValue + String(currentRate) + ". " + voltageValue + String(voltage) + "."); //Logs
-  potentiometerControl(currentRate);
-  delay(waitTime); //Delay
+  
+  //Main reason is to make servo is more stable, filters voltagejumps
+  if((currentRate + 1) == previousCurrentRate || (currentRate - 1) == previousCurrentRate || currentRate == previousCurrentRate){
+    
+    //Do nothing
+    Serial.println("Filter is ON"); //Logs
+  }
+  else{
 
+    //CHANGE SERVO POSITION
+    previousCurrentRate = currentRate;
+    potentiometerControl(currentRate);
+  }
+  
+  delay(waitTime); //Delay
 }
 
 //Turn servo from Min to Max and vice versa
@@ -156,7 +169,6 @@ void potentiometerControl(int currentRate){
   if(servoPosition >= minTurn && servoPosition <= maxTurn){
 
     //Log:
-
     if(previousServoPosition > servoPosition){
 
       //Down
