@@ -17,9 +17,19 @@ const String turnRight = "-->";
 const String potentiometerValue = "Potentiometer: ";
 const String voltageValue = "Voltage: ";
 
+//MIN and MAX values for the servo
+//MIN and MAX are safe values for servo. PLEASE NOTE that each servo has different min and max values.
+const int minTurn = 45;
+const int maxTurn = 180;
+
+const String askForServoPosition = "Please enter a servo position:"; 
+String validValues = "Min: " + String(minTurn) + " Max: " + String(maxTurn);
+const String invalidInput = "ERROR: invalid input. Pleaase reenter.";
+
 //Variables
 int currentRate; //Potentiometer is reading the voltage between 0 and 1023.
 float voltage;
+String prePosition;
 int servoPosition = 0; //Servo position variable
 
 //Ojects
@@ -42,8 +52,44 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  manualControl();
+  
+  /*
   currentRate = analogRead(potentiometerAnalogPin); //Reading from potentiometer
   voltage = currentRate / convertionRate; //Convert input from potentiometer in to VOLTS
   Serial.println(potentiometerValue + String(currentRate) + ". " + voltageValue + String(voltage) + "."); //Logs
+  delay(waitTime); //Delay
+  */
+}
+
+//Control servo manualy
+void manualControl(){
+
+  //Prompt the user
+  Serial.println(askForServoPosition);
+  Serial.println(validValues);
+
+  //Wait for user input
+  while(Serial.available() == 0){
+    //Do nothing
+    }
+
+  //Get servo position
+  prePosition = Serial.readString();
+  prePosition.trim();
+  //servoPosition = Serial.parseInt();
+  servoPosition = prePosition.toInt();
+  Serial.println("servoPosition: " + String(servoPosition));
+
+  //Set servo position
+  if(servoPosition >= minTurn && servoPosition <= maxTurn){
+    
+    servoObj.write(servoPosition);
+   }
+   else{
+
+    Serial.println(invalidInput);
+   }
+
   delay(waitTime); //Delay
 }
