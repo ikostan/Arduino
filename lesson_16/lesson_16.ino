@@ -22,14 +22,20 @@ int currentRate; //Potentiometer is reading the voltage between 0 and 1023.
 float voltage;
 int servoPosition = 0; //Servo position variable
 
+//Ojects
+Servo servoObj; //Servo object
+
 //Setup
 void setup() {
   // put your setup code here, to run once:
 
   Serial.begin(baudSpeed); //Sets the data rate in bits per second (baud) for serial data transmission
-  Serial.println(lessonName);
+  Serial.println(lessonName); //Log
+
+  servoObj.attach(servoControlPin); //Attaching servo to pin 9
+  
   pinMode(potentiometerAnalogPin, INPUT); // Set analog pin A0 for potentiometer
-  pinMode(servoControlPin, OUTPUT); // set digital pin 9 for servo
+  //pinMode(servoControlPin, OUTPUT); // set digital pin 9 for servo
 }
 
 //Main loop
