@@ -21,6 +21,7 @@ const String voltageValue = "Voltage: ";
 //MIN and MAX are safe values for servo. PLEASE NOTE that each servo has different min and max values.
 const int minTurn = 45;
 const int maxTurn = 180;
+const int turnSpeed = 2;
 
 const String askForServoPosition = "Please enter a servo position:"; 
 String validValues = "Min: " + String(minTurn) + " Max: " + String(maxTurn);
@@ -52,7 +53,13 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  /*
+  loopingServo();
+  */
+
+  /*
   manualControl();
+  */
   
   /*
   currentRate = analogRead(potentiometerAnalogPin); //Reading from potentiometer
@@ -60,6 +67,45 @@ void loop() {
   Serial.println(potentiometerValue + String(currentRate) + ". " + voltageValue + String(voltage) + "."); //Logs
   delay(waitTime); //Delay
   */
+}
+
+//Turn servo from Min to Max and vice versa
+void loopingServo(){
+
+  //UP
+  for(servoPosition = minTurn; servoPosition <= maxTurn; servoPosition = servoPosition + turnSpeed){
+
+    if(servoPosition >= minTurn && servoPosition <= maxTurn){
+
+      //Set servo position
+      Serial.println(turnRight);
+      servoObj.write(servoPosition);
+     }
+     else{
+      //Error
+      Serial.println(invalidInput);
+     }
+
+     delay(waitTime); //Delay
+   }
+
+   //DOWN
+   for(servoPosition = maxTurn; servoPosition >= minTurn; servoPosition = servoPosition - turnSpeed){
+
+    //Set servo position
+    if(servoPosition >= minTurn && servoPosition <= maxTurn){
+
+      //Set servo position
+      Serial.println(turnLeft);
+      servoObj.write(servoPosition);
+     }
+     else{
+      //Error
+      Serial.println(invalidInput);
+     }
+
+     delay(waitTime); //Delay
+   }
 }
 
 //Control servo manualy
