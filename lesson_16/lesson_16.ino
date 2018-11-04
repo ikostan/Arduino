@@ -72,7 +72,9 @@ void loop() {
   //Serial.println(potentiometerValue + String(currentRate) + ". " + voltageValue + String(voltage) + "."); //Logs
   
   //Main reason is to make servo is more stable, filters voltagejumps
-  if((currentRate + 1) == previousCurrentRate || (currentRate - 1) == previousCurrentRate || currentRate == previousCurrentRate){
+  if(currentRate == (previousCurrentRate + 1) || 
+      currentRate == (previousCurrentRate - 1) || 
+      currentRate == previousCurrentRate){
     
     //Do nothing
     Serial.println("Filter is ON"); //Logs
