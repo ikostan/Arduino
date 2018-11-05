@@ -33,5 +33,8 @@ void loop() {
   digitalWrite(trigerPin, LOW); //Set a triger ping LOW
 
   //Mesure a time for ping to come back
-  pingTime = pulseIn(echoPin, HIGH);
+  pingTime = pulseIn(echoPin, HIGH); //Ping travel time in micro seconds
+  speedOfSound = ((targetDistance * 2) / pingTime) * (1000000 / 1) * 3600 / 63360; //Speed calculation in miles per hour
+  Serial.println("Speed calculation in miles per hour: " + String(speedOfSound));
+  delay(1000);
 }
