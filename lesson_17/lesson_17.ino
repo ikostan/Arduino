@@ -8,6 +8,11 @@ const int waitTime = 25; //Wait time in ms
 const int echoPin = 11;
 const int trigerPin = 13;
 
+//Variables
+int pingTime; //Time for ping to get target end return
+float speedOfSound; //Speed of sound calculation
+float targetDistance = 1.97; //Distance in inch
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(baudSpeed);
