@@ -4,9 +4,16 @@ const String lessonName = "LESSON 17: Measure Speed of Sound with Arduino and Ul
 const int baudSpeed = 9600;
 const int waitTime = 25; //Wait time in ms
 
+//Pins
+const int echoPin = 11;
+const int trigerPin = 13;
+
 void setup() {
   // put your setup code here, to run once:
-
+  Serial.begin(baudSpeed);
+  Serial.println(lessonName);
+  pinMode(echoPin, INPUT);
+  pinMode(trigerPin, OUTPUT);
 }
 
 void loop() {
