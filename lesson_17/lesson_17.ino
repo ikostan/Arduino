@@ -7,6 +7,7 @@ const int waitTime = 25; //Wait time in ms
 //Pins
 const int echoPin = 11;
 const int trigerPin = 13;
+const int sleepTime = 2000;
 
 //Variables
 int pingTime; //Time for ping to get target end return
@@ -24,4 +25,13 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  //Send a signal
+  digitalWrite(trigerPin, LOW); //Set a triger ping LOW
+  delayMicroseconds(2000); //WAIT
+  digitalWrite(trigerPin, HIGH); //Send a triger ping HIGH
+  delayMicroseconds(10); //WAIT
+  digitalWrite(trigerPin, LOW); //Set a triger ping LOW
+
+  //Mesure a time for ping to come back
+  pingTime = pulseIn(echoPin, HIGH);
 }
