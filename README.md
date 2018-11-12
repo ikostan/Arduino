@@ -10,6 +10,8 @@ http://www.toptechboy.com/arduino/les...
 #### Arduino Lesson 1: 
 In this lesson we take our first look at the Arduino Microcontroller, and you will write your first simple program. Don’t be afraid, we will take you through it step by step with a video and instructional diagrams.
 
+In this simple tutorial we will take you step by step through the process of writing your first arduino microcontroller program. The program will blink an LED on the circuit board.
+
 #### Arduino Lesson 2: 
 In this lesson we build our first external circuit and control it from the Arduino. We use digitalWrite commands to turn the arduino on and off.
 
