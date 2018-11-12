@@ -10,10 +10,13 @@
  * 
  * pulseWidth = pulseIn(outPin, LOW);    //Measure length of a LOW pulse at pin outPin.
  * This measurement will return a value between 0 an 102,400. 
+ * 
  * Because of this, you need to be sure to declare pulseWidth variable an unsigned int. 
  * Normal integers can only hold numbers up to +/- 32,768 an unsigned int allows only positive numbers but allows numbers up to 4,294,967,295. 
+ * 
  * The number that is returned which we put in the variable pulseWidth above can be interpreted as such: The lower the number, the stronger the color being read. 
  * The larger the number, the weaker the color.
+ * 
  * We need to somehow convert this rather odd number into something that means something in the real world. 
  * Well, when we write values to an RGB LED we want them to be between 0 and 255.  
  * Also, that is a fairly standard scale to report RGB colors . . . by giving the relative strength of the compoents of R, G, and B on a scale from 0 to 255. 
@@ -43,16 +46,27 @@ const int pinOUT = 4;
 const int pinS2 = 7;
 const int pinS3 = 8;
 
+//Color strength: numbers between 0-255
+int redColorStrength;
+int greenColorStrength;
+int blueColorStrength;
+
+unsigned int pulseWidth; //Big int that can hold numbers up to 4,294,967,295
+
+//Initial Setup
 void setup() {
+  
   // put your setup code here, to run once:
   Serial.begin(baudSpeed);
   Serial.println(lessonName);
 }
 
+//Main loop
 void loop() {
+  
   // put your main code here, to run repeatedly:
   turnOffLed();
-  testLed();
+  //testLed();
 }
 
 
@@ -60,9 +74,9 @@ void loop() {
 void turnOffLed(){
   
   //Turn off all colors
-  analogWrite(pinRed, 0);
-  analogWrite(pinGreen, 0);
-  analogWrite(pinBlue, 0);
+  analogWrite(pinRed, 0); //red
+  analogWrite(pinGreen, 0); //green
+  analogWrite(pinBlue, 0); //blue
 }
 
 
