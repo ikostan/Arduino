@@ -15,6 +15,8 @@ In this simple tutorial we will take you step by step through the process of wri
 #### Arduino Lesson 2: 
 In this lesson we build our first external circuit and control it from the Arduino. We use digitalWrite commands to turn the arduino on and off.
 
+This video shows how to connect a circuit on a breadboard. It shows how the rows and columns of the breadboard are connected. We demonstrate this with a simple LED circuit controlled by the Arduino.
+
 #### Arduino Lesson 3: 
 In this lesson we create a two LED circuit, and we learn about for loops.
 
