@@ -21,7 +21,8 @@
  * Well, when we write values to an RGB LED we want them to be between 0 and 255.  
  * Also, that is a fairly standard scale to report RGB colors . . . by giving the relative strength of the compoents of R, G, and B on a scale from 0 to 255. 
  * First we need to convert 0 to 102,400 to this range.  102,400/400 = 256. 
- * Almost exactly what we want! But we need to subtract one. So, we could say that rColorStrength = (pulseWidth/400) – 1. 
+ * Almost exactly what we want! But we need to subtract one. 
+ * So, we could say that rColorStrength = (pulseWidth/400) – 1. 
  * That gets us a number between 0 and 255. 
  * Only problem is, remember that in the original pulseWidth, big numbers mean weak colors and small numbers mean strong colors, so we need to fix that. 
  * We could fix it by now saying:
@@ -57,16 +58,24 @@ unsigned int pulseWidth; //Big int that can hold numbers up to 4,294,967,295
 void setup() {
   
   // put your setup code here, to run once:
+
+  //Serial port setup
   Serial.begin(baudSpeed);
   Serial.println(lessonName);
+
+  //Test LED
+  turnOffLed();
+  testLed();
+  turnOffLed();
 }
 
 //Main loop
 void loop() {
   
   // put your main code here, to run repeatedly:
-  turnOffLed();
-  //testLed();
+  
+  //
+  
 }
 
 
@@ -84,17 +93,17 @@ void turnOffLed(){
 void testLed(){
 
   //Red
-  analogWrite(pinRed, ledBrightness);
-  delay(longWaitTime);
   turnOffLed();
+  analogWrite(pinRed, ledBrightness);
+  delay(longWaitTime); 
 
   //Green
-  analogWrite(pinGreen, ledBrightness);
-  delay(longWaitTime);
   turnOffLed();
+  analogWrite(pinGreen, ledBrightness);
+  delay(longWaitTime); 
 
   //Blue
+  turnOffLed();
   analogWrite(pinBlue, ledBrightness);
   delay(longWaitTime);
-  turnOffLed();
 }
