@@ -20,6 +20,8 @@ This video shows how to connect a circuit on a breadboard. It shows how the rows
 #### Arduino Lesson 3: 
 In this lesson we create a two LED circuit, and we learn about for loops.
 
+Arduino Lesson 3 introduces the concept of a for loop and shows how it works. The lesson centers around controlling two LED's
+
 #### Arduino Lesson 4: 
 Learn how to print to your computer screen from the Arduino using your serial port. Good Stuff!
 
