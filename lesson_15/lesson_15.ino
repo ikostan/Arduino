@@ -46,7 +46,7 @@ const int pinBlue = 6;
 const int ledBrightness = 120;
 
 //Color sensor
-const int pinOUT = 4; //
+const int pinOUT = 4; //Color Sensor OUT pin
 const int pinS2 = 7;  //Pin S2
 const int pinS3 = 8;  //Pin S3
 
@@ -66,6 +66,9 @@ void setup() {
   Serial.begin(baudSpeed);
   Serial.println(lessonName);
 
+  //LED pins setup
+  setUpLedPins();
+
   //Test LED
   turnOffLed();
   testLed();
@@ -82,6 +85,14 @@ void loop() {
 }
 
 
+//Setup LED pins
+void setUpLedPins(){
+
+  pinMode(pinRed, OUTPUT);
+  pinMode(pinGreen, OUTPUT);
+  pinMode(pinBlue, OUTPUT);
+}
+
 //Turn off all colors
 void turnOffLed(){
   
@@ -89,6 +100,7 @@ void turnOffLed(){
   analogWrite(pinRed, 0); //red
   analogWrite(pinGreen, 0); //green
   analogWrite(pinBlue, 0); //blue
+  Serial.println("All LED colors are turned off");
 }
 
 
@@ -98,15 +110,18 @@ void testLed(){
   //Red
   turnOffLed();
   analogWrite(pinRed, ledBrightness);
+  Serial.println("Red is ON");
   delay(longWaitTime); 
 
   //Green
   turnOffLed();
   analogWrite(pinGreen, ledBrightness);
+  Serial.println("Green is ON");
   delay(longWaitTime); 
 
   //Blue
   turnOffLed();
   analogWrite(pinBlue, ledBrightness);
+  Serial.println("Blue is ON");
   delay(longWaitTime);
 }
