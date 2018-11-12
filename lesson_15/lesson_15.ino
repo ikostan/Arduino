@@ -37,15 +37,18 @@ const int waitTime = 25; //Wait time in ms
 const int longWaitTime = 500; 
 
 const String lessonName = "LESSON 15: Super Cool Arduino Color Sensor Project";
+
+//LED pins
 const int pinRed = 11;
 const int pinGreen = 10;
 const int pinBlue = 6;
 
 const int ledBrightness = 120;
 
-const int pinOUT = 4;
-const int pinS2 = 7;
-const int pinS3 = 8;
+//Color sensor
+const int pinOUT = 4; //
+const int pinS2 = 7;  //Pin S2
+const int pinS3 = 8;  //Pin S3
 
 //Color strength: numbers between 0-255
 int redColorStrength;
