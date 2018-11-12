@@ -34,22 +34,24 @@
 
 const int baudSpeed = 9600;
 const int waitTime = 25; //Wait time in ms
-const int longWaitTime = 500; 
+const int longWaitTime = 1000; 
 const int maxColorStrength = 255;
 
 const String lessonName = "LESSON 15: Super Cool Arduino Color Sensor Project";
 
 //LED pins
-const int pinRed = 11;
-const int pinGreen = 10;
-const int pinBlue = 6;
+const int pinGreen = 9;
+const int pinRed = 10;
+const int pinBlue = 11;
 
 const int ledBrightness = 120;
 
 //Color sensor
-const int pinOUT = 4; //Color Sensor OUT pin
-const int pinS2 = 7;  //Pin S2
-const int pinS3 = 8;  //Pin S3
+const int pinOUT = 8; //Color Sensor OUT pin
+const int pinS0 = 4;  //Pin S0
+const int pinS1 = 5;  //Pin S1
+const int pinS2 = 6;  //Pin S2
+const int pinS3 = 7;  //Pin S3
 
 //Color strength: numbers between 0-255
 int redColorStrength;
@@ -86,8 +88,12 @@ void loop() {
   
   //Reading colors:
   readRedComponent();
+  delay(200);
   readBlueComponent();
+  delay(200);
   readGreenComponent();
+  delay(200);
+  Serial.println();
 }
 
 
@@ -95,54 +101,57 @@ void loop() {
 void readRedComponent(){
 
   //Read RED component of the color: S2 and S3 set to LOW
-  Serial.println("Read RED component of the color: S2 and S3 set to LOW...");
+  //Serial.println("Read RED component of the color: S2 and S3 set to LOW...");
   digitalWrite(pinS2, LOW);
   digitalWrite(pinS3, LOW);
 
   //Measure length of a LOW pulse at pin outPin.
   pulseWidth = pulseIn(pinOUT, LOW);
-  Serial.println("pilseIn = " + String(pulseWidth));
+  //Serial.println("pilseIn = " + String(pulseWidth));
+  Serial.print("R = " + String(pulseWidth));
   
   //Translate the mesurment into color strength (MIN - 0, MAX - 255)
-  redColorStrength = (pulseWidth / 400.) - 1;
-  redColorStrength = maxColorStrength - redColorStrength;
-  Serial.println("redColorStrength = " + String(redColorStrength));
+  //redColorStrength = (pulseWidth / 400) - 1;
+  //redColorStrength = maxColorStrength - redColorStrength;
+  //Serial.println("Red: " + String(redColorStrength));
 }
 
 //Read blue component
 void readBlueComponent(){
 
   //Read BLUE component of the color: S2 LOW and S3 set to HIGH
-  Serial.println("Read BLUE component of the color: S2 set to LOW and S3 set to HIGH...");
+  //Serial.println("Read BLUE component of the color: S2 set to LOW and S3 set to HIGH...");
   digitalWrite(pinS2, LOW);
   digitalWrite(pinS3, HIGH);
 
   //Measure length of a LOW pulse at pin outPin.
   pulseWidth = pulseIn(pinOUT, LOW);
-  Serial.println("pilseIn = " + String(pulseWidth));
+  //Serial.println("pilseIn = " + String(pulseWidth));
+  Serial.print(" B = " + String(pulseWidth));
   
   //Translate the mesurment into color strength (MIN - 0, MAX - 255)
-  blueColorStrength = (pulseWidth / 400.) - 1;
-  blueColorStrength = maxColorStrength - blueColorStrength;
-  Serial.println("blueColorStrength = " + String(blueColorStrength));
+  //blueColorStrength = (pulseWidth / 400) - 1;
+  //blueColorStrength = maxColorStrength - blueColorStrength;
+  //Serial.println("Blue: " + String(blueColorStrength));
 }
 
 //Read green component
 void readGreenComponent(){
 
   //Read GREEN component of the color: S2 HIGH and S3 set to HIGH
-  Serial.println("Read GREEN component of the color: S2 and S3 set to HIGH...");
+  //Serial.println("Read GREEN component of the color: S2 and S3 set to HIGH...");
   digitalWrite(pinS2, HIGH);
   digitalWrite(pinS3, HIGH);
 
   //Measure length of a LOW pulse at pin outPin.
   pulseWidth = pulseIn(pinOUT, LOW);
-  Serial.println("pilseIn = " + String(pulseWidth));
+  //Serial.println("pilseIn = " + String(pulseWidth));
+  Serial.print(" G = " + String(pulseWidth));
   
   //Translate the mesurment into color strength (MIN - 0, MAX - 255)
-  greenColorStrength = (pulseWidth / 400.) - 1;
-  greenColorStrength = maxColorStrength - greenColorStrength;
-  Serial.println("greenColorStrength = " + String(greenColorStrength));
+  //greenColorStrength = (pulseWidth / 400) - 1;
+  //greenColorStrength = maxColorStrength - greenColorStrength;
+  //Serial.println("Green: " + String(greenColorStrength));
 }
 
 //Setup LED pins
@@ -156,9 +165,15 @@ void setUpLedPins(){
 //Setup Color Sensor pins
 void setUpColorSensorPins(){
 
+  pinMode(pinS0, OUTPUT);
+  pinMode(pinS1, OUTPUT);
   pinMode(pinS2, OUTPUT);
   pinMode(pinS3, OUTPUT);
   pinMode(pinOUT, INPUT);
+
+  // Setting frequency scaling to 20%
+  digitalWrite(pinS0,HIGH);
+  digitalWrite(pinS1,LOW);
 }
 
 //Turn off all colors
@@ -170,7 +185,6 @@ void turnOffLed(){
   analogWrite(pinBlue, 0); //blue
   Serial.println("All LED colors are turned off");
 }
-
 
 //Test LED
 void testLed(){
