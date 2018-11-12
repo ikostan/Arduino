@@ -8,12 +8,13 @@ const int pinRed = 11;
 const int pinGreen = 10;
 const int pinBlue = 6;
 
+const int pinOUT = 4;
 const int pinS2 = 7;
 const int pinS3 = 8;
 
 void setup() {
   // put your setup code here, to run once:
-
+  
 }
 
 void loop() {

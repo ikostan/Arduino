@@ -52,6 +52,8 @@ If Statements and Conditionals in the Arduino. In this lesson we learn how to ha
 #### Arduino Lesson 15: 
 This is a Super Cool project that turns the RGB LED to whatever color that is put in front of a color sensor. It works for an amazing array of color cards.
 
+This tutorial shows you how to create a project where a color sensor reads the color of a colored card, and then sets the RGB LED to that color. This is done with an arduino microcontroller. The system works well for a wide variety of colors, not just the primary colors. More details see arduino lesson #15 at www.toptechboy.com
+
 #### Arduino Lesson 16: 
 Control the position of a servo from a potentiometer using the Arduino.
 
