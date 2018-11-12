@@ -101,9 +101,34 @@ void loop() {
   delay(longWaitTime);
   
   //2. Read BLUE component of the color: S2 LOW and S3 set to HIGH
+  Serial.println("2. Read BLUE component of the color: S2 set to LOW and S3 set to HIGH...");
+  digitalWrite(pinS2, LOW);
+  digitalWrite(pinS3, HIGH);
 
-  //3. Read GREEN component of the color: S2 HIGH and S3 set to HIGH
+  //Measure length of a LOW pulse at pin outPin.
+  pulseWidth = pulseIn(pinOUT, LOW);
+  Serial.println("pilseIn = " + String(pulseWidth));
   
+  //Translate the mesurment into color strength (MIN - 0, MAX - 255)
+  blueColorStrength = (pulseWidth / 400) - 1;
+  blueColorStrength = maxColorStrength - blueColorStrength;
+  Serial.println("blueColorStrength = " + String(blueColorStrength));
+  delay(longWaitTime);
+  
+  //3. Read GREEN component of the color: S2 HIGH and S3 set to HIGH
+  Serial.println("3. Read GREEN component of the color: S2 and S3 set to HIGH...");
+  digitalWrite(pinS2, HIGH);
+  digitalWrite(pinS3, HIGH);
+
+  //Measure length of a LOW pulse at pin outPin.
+  pulseWidth = pulseIn(pinOUT, LOW);
+  Serial.println("pilseIn = " + String(pulseWidth));
+  
+  //Translate the mesurment into color strength (MIN - 0, MAX - 255)
+  greenColorStrength = (pulseWidth / 400) - 1;
+  greenColorStrength = maxColorStrength - greenColorStrength;
+  Serial.println("greenColorStrength = " + String(greenColorStrength));
+  delay(longWaitTime);
 }
 
 
