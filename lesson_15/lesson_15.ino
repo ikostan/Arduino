@@ -35,6 +35,7 @@
 const int baudSpeed = 9600;
 const int waitTime = 25; //Wait time in ms
 const int longWaitTime = 500; 
+const int maxColorStrength = 255;
 
 const String lessonName = "LESSON 15: Super Cool Arduino Color Sensor Project";
 
@@ -83,7 +84,25 @@ void loop() {
   
   // put your main code here, to run repeatedly:
   
-  //
+  //Reading colors:
+  //1. Read RED component of the color: S2 and S3 set to LOW
+  Serial.println("1. Read RED component of the color: S2 and S3 set to LOW...");
+  digitalWrite(pinS2, LOW);
+  digitalWrite(pinS3, LOW);
+
+  //Measure length of a LOW pulse at pin outPin.
+  pulseWidth = pulseIn(pinOUT, LOW);
+  Serial.println("pilseIn = " + String(pulseWidth));
+  
+  //Translate the mesurment into color strength (MIN - 0, MAX - 255)
+  redColorStrength = (pulseWidth / 400) - 1;
+  redColorStrength = maxColorStrength - redColorStrength;
+  Serial.println("redColorStrength = " + String(redColorStrength));
+  delay(longWaitTime);
+  
+  //2. Read BLUE component of the color: S2 LOW and S3 set to HIGH
+
+  //3. Read GREEN component of the color: S2 HIGH and S3 set to HIGH
   
 }
 
