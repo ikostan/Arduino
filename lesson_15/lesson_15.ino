@@ -69,6 +69,9 @@ void setup() {
   //LED pins setup
   setUpLedPins();
 
+  //Setting up color sensor pins
+  setUpColorSensorPins();
+
   //Test LED
   turnOffLed();
   testLed();
@@ -91,6 +94,14 @@ void setUpLedPins(){
   pinMode(pinRed, OUTPUT);
   pinMode(pinGreen, OUTPUT);
   pinMode(pinBlue, OUTPUT);
+}
+
+//Setup Color Sensor pins
+void setUpColorSensorPins(){
+
+  pinMode(pinS2, OUTPUT);
+  pinMode(pinS3, OUTPUT);
+  pinMode(pinOUT, INPUT);
 }
 
 //Turn off all colors
