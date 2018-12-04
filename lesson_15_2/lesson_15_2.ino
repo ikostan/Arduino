@@ -33,6 +33,11 @@ Because of this, you need to be sure to declare pulseWidth variable an unsigned 
 */
 unsigned int pulseWidth;
 
+//Color strength (RGB):
+int rColorStrength;
+int gColorStrength;
+int bColorStrength;
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(baudSpeed);
@@ -41,14 +46,51 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  
+  //Read red component of the color (S2 and S3 set to LOW):
+  //Serial.println("Reading RED component..."); //Log
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,LOW);
+  pulseWidth = pulseIn(outPin, LOW); //Make a mesurment  
+  /*
+  First we need to convert 0 to 102,400 to this range.  
+  102,400/400 = 256. 
+  Almost exactly what we want! But we need to subtract one. 
+  So, we could say that rColorStrength = (pulseWidth/400) – 1.
+  That gets us a number between 0 and 255. 
+  Only problem is, remember that in the original pulseWidth, 
+  big numbers mean weak colors and small numbers mean strong colors, 
+  so we need to fix that. We could fix it by now saying:
+  rColorStrength = (255 – rColorStrength); 
+  */
+  rColorStrength = (pulseWidth / 400.) - 1;
+  rColorStrength = 255 - rColorStrength;
 
+  //Read green component of the color (S2 and S3 set to HIGH):
+  //Serial.println("Reading GREEN component..."); //Log
+  digitalWrite(S2,HIGH);
+  digitalWrite(S3,HIGH);
+  pulseWidth = pulseIn(outPin, LOW); //Make a mesurment
+  gColorStrength = (pulseWidth / 400.) - 1;
+  gColorStrength = 255 - gColorStrength;
+
+  //Read blue component of the color (S2 LOW and S3 HIGH):
+  //Serial.println("Reading BLUE component..."); //Log
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,HIGH);
+  pulseWidth = pulseIn(outPin, LOW); //Make a mesurment
+  bColorStrength = (pulseWidth / 400.) - 1;
+  bColorStrength = 255 - bColorStrength;
+
+  Serial.println("R: " + String(rColorStrength) + " G: " + String(gColorStrength) + " B: " + String(bColorStrength)); //Log
+
+  delay(500);
 }
 
 //Set up pins
 void setUpPins(){
 
-    Serial.println("Setting up pins...");
+    //Serial.println("Setting up pins..."); //Log
     
     //RGB
     pinMode(redLedPin,OUTPUT);
@@ -60,5 +102,5 @@ void setUpPins(){
     pinMode(S3,OUTPUT);
     pinMode(outPin,INPUT);
 
-    Serial.println("Finished setting up pins.");
+    //Serial.println("Finished setting up pins."); //Log
 }
