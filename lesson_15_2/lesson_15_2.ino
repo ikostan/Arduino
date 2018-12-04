@@ -15,6 +15,7 @@ HIGH |   HIGH |   Green
 
 #define lessonName "LESSON 15: Arduino Color Sensor and RGB LED" //Holds lesson name
 #define baudSpeed 9600 //Baud speed
+#define delayTime 500  //Wait time
 
 // RGB LED pins:
 #define redLedPin 11   //Red
@@ -82,9 +83,32 @@ void loop() {
   bColorStrength = (pulseWidth / 400.) - 1;
   bColorStrength = 255 - bColorStrength;
 
-  Serial.println("R: " + String(rColorStrength) + " G: " + String(gColorStrength) + " B: " + String(bColorStrength)); //Log
+  Serial.println("R: " + String(rColorStrength) + " | G: " + String(gColorStrength) + " | B: " + String(bColorStrength)); //Log
 
-  delay(500);
+  //Setting up RGB LED color:
+  if(rColorStrength > gColorStrength && rColorStrength > bColorStrength){
+
+    digitalWrite(redLedPin,HIGH);
+    digitalWrite(greenLedPin,LOW);
+    digitalWrite(blueLedPin,LOW);
+  }
+
+  if(gColorStrength > rColorStrength && gColorStrength > bColorStrength){
+
+    digitalWrite(redLedPin,LOW);
+    digitalWrite(greenLedPin,HIGH);
+    digitalWrite(blueLedPin,LOW);
+    Serial.println("RGB led is green now"); //Log
+  }
+
+  if(bColorStrength > gColorStrength && bColorStrength > rColorStrength){
+
+    digitalWrite(redLedPin,LOW);
+    digitalWrite(greenLedPin,LOW);
+    digitalWrite(blueLedPin,HIGH);
+  }
+
+  delay(delayTime);
 }
 
 //Set up pins
