@@ -37,9 +37,24 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(baudSpeed);
   Serial.println(lessonName);
+  setUpPins();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
+}
+
+//Set up pins
+void setUpPins(){
+
+    //RGB
+    pinMode(redLedPin,OUTPUT);
+    pinMode(greenLedPin,OUTPUT);
+    pinMode(blueLedPin,OUTPUT);
+
+    //Sensor
+    pinMode(S2,OUTPUT);
+    pinMode(S3,OUTPUT);
+    pinMode(outPin,INPUT);
 }
