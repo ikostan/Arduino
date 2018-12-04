@@ -85,7 +85,33 @@ void loop() {
 
   Serial.println("R: " + String(rColorStrength) + " | G: " + String(gColorStrength) + " | B: " + String(bColorStrength)); //Log
 
-  //Setting up RGB LED color:
+  simpleRGB();
+
+  delay(delayTime);
+}
+
+//Set up pins
+void setUpPins(){
+
+    //Serial.println("Setting up pins..."); //Log
+    
+    //RGB
+    pinMode(redLedPin,OUTPUT);
+    pinMode(greenLedPin,OUTPUT);
+    pinMode(blueLedPin,OUTPUT);
+
+    //Sensor
+    pinMode(S2,OUTPUT);
+    pinMode(S3,OUTPUT);
+    pinMode(outPin,INPUT);
+
+    //Serial.println("Finished setting up pins."); //Log
+}
+
+//Change RGB led color
+void simpleRGB(){
+
+    //Setting up RGB LED color:
   if(rColorStrength > gColorStrength && rColorStrength > bColorStrength){
 
     digitalWrite(redLedPin,HIGH);
@@ -107,24 +133,4 @@ void loop() {
     digitalWrite(greenLedPin,LOW);
     digitalWrite(blueLedPin,HIGH);
   }
-
-  delay(delayTime);
-}
-
-//Set up pins
-void setUpPins(){
-
-    //Serial.println("Setting up pins..."); //Log
-    
-    //RGB
-    pinMode(redLedPin,OUTPUT);
-    pinMode(greenLedPin,OUTPUT);
-    pinMode(blueLedPin,OUTPUT);
-
-    //Sensor
-    pinMode(S2,OUTPUT);
-    pinMode(S3,OUTPUT);
-    pinMode(outPin,INPUT);
-
-    //Serial.println("Finished setting up pins."); //Log
 }
