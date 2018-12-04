@@ -48,6 +48,8 @@ void loop() {
 //Set up pins
 void setUpPins(){
 
+    Serial.println("Setting up pins...");
+    
     //RGB
     pinMode(redLedPin,OUTPUT);
     pinMode(greenLedPin,OUTPUT);
@@ -57,4 +59,6 @@ void setUpPins(){
     pinMode(S2,OUTPUT);
     pinMode(S3,OUTPUT);
     pinMode(outPin,INPUT);
+
+    Serial.println("Finished setting up pins.");
 }
