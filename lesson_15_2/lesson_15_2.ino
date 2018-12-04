@@ -13,8 +13,8 @@ HIGH |   HIGH |   Green
 ----------------------------
 */
 
-//
-#define lessonName "LESSON 15: Arduino Color Sensor and RGB LED"
+#define lessonName "LESSON 15: Arduino Color Sensor and RGB LED" //Holds lesson name
+#define baudSpeed 9600 //Baud speed
 
 // RGB LED pins:
 #define redLedPin 11   //Red
@@ -22,13 +22,21 @@ HIGH |   HIGH |   Green
 #define blueLedPin 6   //Blue
 
 // Color Sensor pins:
-#define S2 7 //S2
-#define S3 8 //S3
-#define outPin 4 //OUT
+#define S2 7          //S2
+#define S3 8          //S3
+#define outPin 4      //OUT
+
+/*
+Measurement of the color strength.
+This measurement will return a value between 0 an 102,400. 
+Because of this, you need to be sure to declare pulseWidth variable an unsigned int.
+*/
+unsigned int pulseWidth;
 
 void setup() {
   // put your setup code here, to run once:
-
+  Serial.begin(baudSpeed);
+  Serial.println(lessonName);
 }
 
 void loop() {
