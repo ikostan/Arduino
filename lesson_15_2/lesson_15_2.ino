@@ -89,7 +89,13 @@ void loop() {
 
   Serial.println("R: " + String(rColorStrength) + " | G: " + String(gColorStrength) + " | B: " + String(bColorStrength)); //Log
 
-  //simpleRGB();
+  //Some fix because we have too much blue color:
+  //bColorStrength = bColorStrength * .5;
+  //gColorStrength = gColorStrength * .75;
+
+  analogWrite(redLedPin, rColorStrength);
+  analogWrite(greenLedPin, gColorStrength);
+  analogWrite(blueLedPin, bColorStrength);
 
   delay(delayTime);
 }
