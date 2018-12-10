@@ -4,7 +4,9 @@
 #define led 13
 #define baudSpeed 9600
 #define tutorialName "State Change Detection" 
-#define sleepTime 250
+#define sleepTime 400
+int ledSignal = LOW;
+
 int buttonState;
 
 void setup() {
@@ -13,10 +15,28 @@ void setup() {
   Serial.println(tutorialName);
   pinMode(led, OUTPUT);
   pinMode(button, INPUT);
-  digitalWrite(led, LOW);
+  digitalWrite(led, ledSignal);
+  Serial.println("LED is off");
 }
 
 void loop() {
-  
+
+  buttonState = digitalRead(button);
+
+  if(buttonState > 0){
+
+    Serial.println("Button state has changed");
+    
+    if(ledSignal == LOW){
+      ledSignal = HIGH;
+      Serial.println("LED is on");
+      }
+    else{
+      ledSignal = LOW;
+      Serial.println("LED is off");
+      }
+    }
+
+  digitalWrite(led, ledSignal);
   delay(sleepTime);
 }
