@@ -84,6 +84,7 @@ void loop() {
   bColorStrength = 255 - bColorStrength;
 
   setMaxColor();
+  setMinColor();
 
   Serial.println("R: " + String(rColorStrength) + " | G: " + String(gColorStrength) + " | B: " + String(bColorStrength)); //Log
 
@@ -153,5 +154,24 @@ void setMaxColor(){
   if(bColorStrength > gColorStrength && bColorStrength > rColorStrength){
 
     bColorStrength = 255;
+  }
+}
+
+void setMinColor(){
+  
+  //Setting up RGB LED color:
+  if(rColorStrength < gColorStrength && rColorStrength < bColorStrength){
+
+    rColorStrength = 0;
+  }
+
+  if(gColorStrength < rColorStrength && gColorStrength < bColorStrength){
+
+    gColorStrength = 0;
+  }
+
+  if(bColorStrength < gColorStrength && bColorStrength < rColorStrength){
+
+    bColorStrength = 0;
   }
 }
