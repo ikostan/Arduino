@@ -83,9 +83,11 @@ void loop() {
   bColorStrength = (pulseWidth / 400.) - 1;
   bColorStrength = 255 - bColorStrength;
 
+  setMaxColor();
+
   Serial.println("R: " + String(rColorStrength) + " | G: " + String(gColorStrength) + " | B: " + String(bColorStrength)); //Log
 
-  simpleRGB();
+  //simpleRGB();
 
   delay(delayTime);
 }
@@ -111,7 +113,7 @@ void setUpPins(){
 //Change RGB led color
 void simpleRGB(){
 
-    //Setting up RGB LED color:
+  //Setting up RGB LED color:
   if(rColorStrength > gColorStrength && rColorStrength > bColorStrength){
 
     digitalWrite(redLedPin,HIGH);
@@ -132,5 +134,24 @@ void simpleRGB(){
     digitalWrite(redLedPin,LOW);
     digitalWrite(greenLedPin,LOW);
     digitalWrite(blueLedPin,HIGH);
+  }
+}
+
+void setMaxColor(){
+  
+  //Setting up RGB LED color:
+  if(rColorStrength > gColorStrength && rColorStrength > bColorStrength){
+
+    rColorStrength = 255;
+  }
+
+  if(gColorStrength > rColorStrength && gColorStrength > bColorStrength){
+
+    gColorStrength = 255;
+  }
+
+  if(bColorStrength > gColorStrength && bColorStrength > rColorStrength){
+
+    bColorStrength = 255;
   }
 }
