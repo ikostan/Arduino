@@ -29,7 +29,6 @@ void setup() {
   Serial.println(lessonName);
   pinMode(potentiometerPin, INPUT);
   servoObj.attach(servoPin);
-  servoObj.write(servoStart);
 }
 
 void loop() {
