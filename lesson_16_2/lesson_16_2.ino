@@ -7,13 +7,19 @@
 #define servoPin 9
 #define potentiometerPin A0
 #define baudSpeed 9600
-#define delayTime 25
+#define delayTime 35
 
-#define servoStart 15
-#define servoStop 170
+#define servoStart 35
+#define servoStop 160
+
+#define potMin 0
+#define potMax 1023
+
+#define buffValue 3
 
 int potPosition = 0; //Min = 0, Max = 1023
-int servoPosition = 0;
+int servoPosition = servoStart;
+int servoOldPosition = servoStart;
 Servo servoObj; //Servo object
 
 void setup() {
@@ -28,9 +34,22 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
-  //potPosition = analogRead(potentiometerPin); //Reading potentiometer
-  //Serial.println(String(potPosition));
+
+  /*
+  potPosition = 0 => servoPosition = servoStart
+  potPosition = 1023 => servoPosition = servoStop
+  */
+  potPosition = analogRead(potentiometerPin); //Reading potentiometer
+  //Serial.println(String(potPosition)); //Log
+
+  servoPosition = ((160. - 35.) / (1023. - 0)) * potPosition + 35;
+  Serial.println(String(servoPosition)); //Log
+
+  if(servoOldPosition != servoPosition + buffValue || servoOldPosition != servoPosition - buffValue){
+
+    servoObj.write(servoPosition);
+    servoOldPosition = servoPosition;
+  }
   
   //testServo();
   delay(delayTime);
