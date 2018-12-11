@@ -1,3 +1,5 @@
+#include <Servo.h>
+
 //Source:  https://www.youtube.com/watch?v=rTM5gZxBPmY&list=PLGs0VKk2DiYx6CMdOQR_hmJ2NbB4mZQn-&index=19
 
 #define lessonName "Lesson 18: Measure Distance with Arduino and Ultrasonic Sensor"
@@ -11,14 +13,28 @@
 #define trigerPin 13
 
 //Variables
-int pingTime; //Time for ping to get target end return
-float speedOfSound; //Speed of sound calculation
-float targetDistance = 1.97; //Distance in inch
+float pingTime; //Time for ping to get target end return
+float speedOfSound = 776.5; //Speed of sound in miles per hour
+float targetDistance; //Distance to a target
+float servoAngle;
+
+Servo servoObj;
+
 
 void setup() {
 
+  //Start serial monitor
   Serial.begin(baudSpeed);
   Serial.println(lessonName);
+
+  //Set up servo
+  servoObj.attach(servoPin);
+  servoObj.write(30);
+
+  //Set up pins
+  pinMode(servoPin, OUTPUT);
+  pinMode(trigerPin, OUTPUT);
+  pinMode(echoPin, INPUT);
 }
 
 void loop() {
