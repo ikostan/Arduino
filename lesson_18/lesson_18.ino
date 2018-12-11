@@ -60,4 +60,15 @@ void loop() {
 
   Serial.println("The distance to target is " + String(targetDistance) + " inch"); //log
   delay(1000);
+
+  /* 
+   Slope:
+    (160 - 30) / (7 - 0), 160 max servo angle, 30 min servo angle, 0 is 0 inch and 7 is max distance 7 inch
+    slope = 130 / 7
+    Servo angle = (106 / 7) * Distance + 30, 
+   */
+
+   servoAngle = (106. / 7.) * targetDistance + 30.;
+   servoObj.write(servoAngle);
+   delay(100);
 }
