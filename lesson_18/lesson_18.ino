@@ -29,6 +29,8 @@ void setup() {
 
   //Set up servo
   servoObj.attach(servoPin);
+  servoObj.write(160);
+  delay(700);
   servoObj.write(30);
 
   //Set up pins
@@ -38,5 +40,24 @@ void setup() {
 }
 
 void loop() {
-  
+
+  //Triger echo sensor
+  digitalWrite(trigerPin, LOW);
+  delayMicroseconds(2000);
+  digitalWrite(trigerPin, HIGH);
+  delayMicroseconds(15);
+  digitalWrite(trigerPin, LOW);
+
+  //Mesure ping time in microseconds
+  pingTime = pulseIn(echoPin, HIGH);
+  pingTime = pingTime / 1000000.0; //Convert to seconds
+  pingTime = pingTime / 3600.0; //Convert to hours
+
+  //Calculate distanse to target in miles
+  targetDistance = speedOfSound * pingTime;
+  targetDistance = targetDistance / 2.; //Divide by 2 since ping goes back and forward
+  targetDistance = targetDistance * 63360; //Convert to inches
+
+  Serial.println("The distance to target is " + String(targetDistance) + " inch"); //log
+  delay(1000);
 }
