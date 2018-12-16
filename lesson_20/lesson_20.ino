@@ -27,12 +27,20 @@ LCD Pin #  LCD PIN NAME  Arduino Pin
 16    Backlight LED GND   GND
 */
 
+//Generic variables
 #define tutorialName1 "LESSON 20"
 #define tutorialName2 "USING LCD"
 #define tutorialName3 "WITH US SENSOR"
 #define title "Target Distance:"
 #define postfix " inches"
 #define sleepTime 1500
+
+//US sensor variables
+#define trigerPin 13
+#define echoPin 11
+float pingTime;
+float targetDistance; //Inches
+#define speedOfSound = 776.5; //Miles per hour
 
 LiquidCrystal LCD(10,9,5,4,3,2); //Create LCD object
 
