@@ -46,16 +46,23 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
+  printTimerTitle();  
+  printTimerForward();
   printTimerTitle();
-  
-  for(myCounter = 1; myCounter <= 10; myCounter = myCounter + 1){
+  printTimerBackward();
+}
+
+void printTimerForward(){
+
+    for(myCounter = 1; myCounter <= 10; myCounter = myCounter + 1){
 
      LCD.setCursor(0,1); //Set cursor to 1 column (0) and 2nd row (1)
      LCD.print(String(myCounter) + " seconds"); //print
      delay(1000); //wait 1 sec
   }
+}
 
-  printTimerTitle();
+void printTimerBackward(){
 
   for(myCounter = 9; myCounter > 0; myCounter = myCounter - 1){
 
@@ -70,7 +77,7 @@ void printTimerTitle(){
     LCD.setCursor(0,0); //Set cursor to 1 column (0) and 1th row (0)
     LCD.clear(); //clear LCD
     LCD.print("My Timer: ");
-  }
+}
 
 //Print lesson title
 void printTitle(){
