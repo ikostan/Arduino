@@ -34,6 +34,7 @@ LCD Pin #  LCD PIN NAME  Arduino Pin
 #define title "Target Distance:"
 #define postfix " inches"
 #define sleepTime 1500
+#define baudSpeed 9600
 
 //US sensor variables
 #define trigerPin 13
@@ -46,7 +47,17 @@ LiquidCrystal LCD(10,9,5,4,3,2); //Create LCD object
 
 void setup() {
   // put your setup code here, to run once:
-  LCD.begin(16,2); // LCD size 16 columns, 2 rows
+
+  //Serial monitor
+  Serial.begin(baudSpeed); //Start Serial Monitor
+  Serial.println("LESSON 20: Ultrasonic Sensor and LCD on Arduino for Distance Measurements");
+
+  //US sensor
+  pinMode(trigerPin,OUTPUT);
+  pinMode(echoPin,INPUT);
+
+  //LCD
+  LCD.begin(16,2); // LCD size: 16 columns, 2 rows
   LCD.setCursor(0,0); //Set LCD cursor to upper left corner
   printTitle();
 }
