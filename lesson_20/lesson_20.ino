@@ -28,10 +28,10 @@ LCD Pin #  LCD PIN NAME  Arduino Pin
 */
 
 #define tutorialName1 "LESSON 20"
-#define tutorialName2 "UsSING LCD"
+#define tutorialName2 "USING LCD"
 #define tutorialName3 "WITH US SENSOR"
-
-int myCounter;// Declare a counter
+#define title "Target Distance:"
+#define postfix " inches"
 #define sleepTime 1500
 
 LiquidCrystal LCD(10,9,5,4,3,2); //Create LCD object
@@ -60,6 +60,5 @@ void printTitle(){
   LCD.print(tutorialName2); //print
   LCD.setCursor(0,1); //Set cursor to 1 column (0) and 2nd row (1)
   LCD.print(tutorialName3); //print
-  delay((sleepTime * 2));
-  LCD.clear();
+  delay((sleepTime * 3));
 }
