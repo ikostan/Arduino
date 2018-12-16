@@ -31,7 +31,7 @@ LCD Pin #  LCD PIN NAME  Arduino Pin
 #define tutorialName2 "Using LCD"
 #define tutorialName3 "with Arduino"
 
-int myCounter = 0;// Declare a counter
+int myCounter;// Declare a counter
 #define sleepTime 1500
 
 LiquidCrystal LCD(10,9,5,4,3,2); //Create LCD object
@@ -45,7 +45,28 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
+
+  LCD.setCursor(0,0); //Set cursor to 1 column (0) and 1th row (0)
+  LCD.clear(); //clear LCD
+  LCD.print("My Timer: ");
   
+  for(myCounter = 1; myCounter <= 10; myCounter = myCounter + 1){
+
+     LCD.setCursor(0,1); //Set cursor to 1 column (0) and 2nd row (1)
+     LCD.print(String(myCounter) + " seconds"); //print
+     delay(1000); //wait 1 sec
+  }
+
+  LCD.setCursor(0,0); //Set cursor to 1 column (0) and 1th row (0)
+  LCD.clear(); //clear LCD
+  LCD.print("My Timer: ");
+
+  for(myCounter = 9; myCounter > 0; myCounter = myCounter - 1){
+
+     LCD.setCursor(0,1); //Set cursor to 1 column (0) and 2nd row (1)
+     LCD.print(String(myCounter) + " seconds"); //print
+     delay(1000); //wait 1 sec
+  }
 }
 
 //Print lesson title
