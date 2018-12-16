@@ -32,7 +32,6 @@ LCD Pin #  LCD PIN NAME  Arduino Pin
 #define tutorialName2 "USING LCD"
 #define tutorialName3 "WITH US SENSOR"
 #define title "Target Distance:"
-#define postfix " inches"
 #define sleepTime 1500
 #define baudSpeed 9600
 
@@ -41,7 +40,7 @@ LCD Pin #  LCD PIN NAME  Arduino Pin
 #define echoPin 11
 float pingTime;
 float targetDistance; //Inches
-#define speedOfSound = 776.5; //Miles per hour
+#define speedOfSound 776.5 //Miles per hour
 
 LiquidCrystal LCD(10,9,5,4,3,2); //Create LCD object
 
@@ -59,18 +58,41 @@ void setup() {
   //LCD
   LCD.begin(16,2); // LCD size: 16 columns, 2 rows
   LCD.setCursor(0,0); //Set LCD cursor to upper left corner
-  printTitle();
+  printLessonTitle();
+  LCD.clear();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-
+  //Distance mesurment:
+  //1#. Send a ping
+  digitalWrite(trigerPin, LOW); //Send a triger ping to low
+  delayMicroseconds(2000); //Wait in ms
+  digitalWrite(trigerPin, HIGH); //Send a triger ping to high
+  delayMicroseconds(15); //Wait in ms
+  digitalWrite(trigerPin, LOW); //Send a triger ping to low
+  delayMicroseconds(15); //Wait in ms
+  //#2. Mesure ping time and convert into hours
+  pingTime = pulseIn(echoPin, HIGH); //Mesure ping time
+  pingTime = pingTime / 1000000.; //convert to micro sec
+  pingTime = pingTime / 3600.; //convert to hours
+  //#3. Calculate distance to a target
+  targetDistance = (speedOfSound * pingTime) / 2.0; //Devide by 2 cause ping travels back and forward
+  targetDistance = targetDistance * 63360; //Convert miles to inches
+  Serial.println("Distance to target: " + String(targetDistance) + " inch");
+  //Display the result
+  LCD.clear();
+  LCD.setCursor(0,0); //Set LCD cursor to upper left corner
+  LCD.print(title);
+  LCD.setCursor(0,1); //Set LCD cursor to upper left corner
+  LCD.print(String(targetDistance) + " inch");
+  delay(500);
 }
 
 
 //Print lesson title
-void printTitle(){
+void printLessonTitle(){
 
   LCD.setCursor(0,0); //Set cursor to 1 column (0) and 1 row (0)
   LCD.print(tutorialName1); //print title
