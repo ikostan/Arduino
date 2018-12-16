@@ -1,4 +1,4 @@
-#include <LiquidCrystal.h>
+#include <LiquidCrystal.h> //Include LCD library
 
 // LESSON 19: Using LCD Display with Arduino
 // Source: http://www.toptechboy.com/arduino/lesson-19-arduino-lcd-display/
@@ -27,18 +27,37 @@ LCD Pin #  LCD PIN NAME  Arduino Pin
 16    Backlight LED GND   GND
 */
 
-#define tutorialName "LESSON 19: Using LCD Display with Arduino"
+#define tutorialName1 "LESSON 19"
+#define tutorialName2 "Using LCD"
+#define tutorialName3 "with Arduino"
+
+int myCounter = 0;// Declare a counter
+#define sleepTime 1500
 
 LiquidCrystal LCD(10,9,5,4,3,2); //Create LCD object
 
 void setup() {
   // put your setup code here, to run once:
-  LCD.begin(16,2);
+  LCD.begin(16,2); // LCD size 16 columns, 2 rows
   LCD.setCursor(0,0); //Set LCD cursor to upper left corner
-  LCD.print(tutorialName); //print
+  printTitle();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   
+}
+
+//Print lesson title
+void printTitle(){
+  
+  LCD.print(tutorialName1); //print title
+  delay(sleepTime); //sleep
+  LCD.clear(); //clear LCD
+  LCD.print(tutorialName2); //print
+  delay(sleepTime);
+  LCD.clear();
+  LCD.print(tutorialName3); //print
+  delay(sleepTime);
+  LCD.clear();
 }
