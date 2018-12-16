@@ -81,7 +81,7 @@ void loop() {
   targetDistance = (speedOfSound * pingTime) / 2.0; //Devide by 2 cause ping travels back and forward
   targetDistance = targetDistance * 63360; //Convert miles to inches
   Serial.println("Distance to target: " + String(targetDistance) + " inch");
-  //Display the result
+  //#4. Display the result
   LCD.clear();
   LCD.setCursor(0,0); //Set LCD cursor to upper left corner
   LCD.print(title);
