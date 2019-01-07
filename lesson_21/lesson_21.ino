@@ -46,6 +46,10 @@ MISO                  12            SPI Data
 GND                   GND           Common Ground
 */
 
+//SD card variables:
+#define sd_cs (4)
+
+
 //Generic variables
 #define tutorialName1 "LESSON 21"
 #define tutorialName2 "LOG SENSOR DATA"
@@ -61,6 +65,8 @@ float tempC;  // Variable for holding temp in C
 float tempF;  // Variable for holding temp in F
 float pressure; //Variable for holding pressure reading
 
+File mySensorData; //Data object you will write your sesnor data to
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -69,11 +75,21 @@ void setup() {
   Serial.begin(baudSpeed); //Start Serial Monitor
   Serial.println("LESSON 21: LOG SENSOR DATA TO AN SD CARD");
 
+  SD.begin(sd_cs); //Initialize the SD card reader
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
+  mySensorData = SD.open("PTData.txt", FILE_WRITE);
+
+  if(!mySensorData){
+
+    Serial.println("ERROR: SD card failure!");
+    }
   
+  mySensorData.println("test");                        //write pressure and end the line (println)
+  mySensorData.close(); 
+   
   delay(sleepTime);
 }
