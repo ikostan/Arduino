@@ -49,14 +49,13 @@ GND                   GND           Common Ground
 //SD card variables:
 #define sd_cs (4)
 
-
 //Generic variables
 #define tutorialName1 "LESSON 21"
 #define tutorialName2 "LOG SENSOR DATA"
 #define tutorialName3 "TO AN SD CARD"
 #define sleepTime 1500
 #define baudSpeed 9600
-
+String fileName = "PTData.txt";
 
 LiquidCrystal LCD(10,9,5,4,3,2); //Create LCD object
 
@@ -67,6 +66,10 @@ float pressure; //Variable for holding pressure reading
 
 File mySensorData; //Data object you will write your sesnor data to
 
+// set up variables using the SD utility library functions:
+Sd2Card card;
+SdVolume volume;
+SdFile root;
 
 void setup() {
   // put your setup code here, to run once:
@@ -75,21 +78,41 @@ void setup() {
   Serial.begin(baudSpeed); //Start Serial Monitor
   Serial.println("LESSON 21: LOG SENSOR DATA TO AN SD CARD");
 
+  Serial.print("\nInitializing SD card...");
+
+  // we'll use the initialization code from the utility libraries
+  // since we're just testing if the card is working!
+  if (!card.init(SPI_HALF_SPEED, sd_cs)) {
+    Serial.println("initialization failed. Things to check:");
+    Serial.println("* is a card inserted?");
+    Serial.println("* is your wiring correct?");
+    Serial.println("* did you change the chipSelect pin to match your shield or module?");
+    Serial.println("\nPlease verify all the above and restart your device.");
+    while (1);
+  } else {
+    Serial.println("Wiring is correct and a card is present.");
+  }
+
   SD.begin(sd_cs); //Initialize the SD card reader
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
+  // Tests whether a file or directory exists on the SD card. 
+  if(SD.exists(fileName)){
+    mySensorData = SD.open(fileName, FILE_WRITE);
 
-  mySensorData = SD.open("PTData.txt", FILE_WRITE);
-
-  if(!mySensorData){
-
-    Serial.println("ERROR: SD card failure!");
+    if(!mySensorData){
+      Serial.println("ERROR: SD card failure!");
     }
+    else{
+      mySensorData.println("test");                        //write pressure and end the line (println)
+      mySensorData.close();  
+    }
+  }
+  else{
+      Serial.println("ERROR: please enter SD card!");
+  }
   
-  mySensorData.println("test");                        //write pressure and end the line (println)
-  mySensorData.close(); 
-   
   delay(sleepTime);
 }
