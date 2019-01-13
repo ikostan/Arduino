@@ -1,4 +1,4 @@
-#include <LiquidCrystal.h>    //Include LCD library
+//#include <LiquidCrystal.h>    //Include LCD library
 #include <SD.h>               //Load SD card library
 #include<SPI.h>               //Load SPI Library
 
@@ -57,7 +57,7 @@ GND                   GND           Common Ground
 #define baudSpeed 9600
 String fileName = "PTData.txt";
 
-LiquidCrystal LCD(10,9,5,4,3,2); //Create LCD object
+//LiquidCrystal LCD(10,9,5,4,3,2); //Create LCD object
 
 
 float tempC;  // Variable for holding temp in C
@@ -70,7 +70,6 @@ File mySensorData; //Data object you will write your sesnor data to
 Sd2Card card;
 SdVolume volume;
 SdFile root;
-bool isCardOk = false;
 
 void setup() {
   // put your setup code here, to run once:
@@ -83,27 +82,25 @@ void setup() {
 
   if(testSdCard()){
     SD.begin(sd_cs); //Initialize the SD card reader
-    getCardType();
+    //getCardType();
+    //getVolumeData();
   }
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  // Tests whether a file or directory exists on the SD card. 
-  if(testSdCard()){
-    mySensorData = SD.open(fileName, FILE_WRITE);
 
-    if(!mySensorData){
-      Serial.println("ERROR: SD card failure!");
-    }
-    else{
-      Serial.println("Writing data...");
-      mySensorData.println("test");                        //write pressure and end the line (println)
-      mySensorData.close();  
-    }
-    
-    delay(sleepTime);
+  mySensorData = SD.open(fileName, FILE_WRITE);
+
+  if(!mySensorData){
+    Serial.println("ERROR: SD card failure!");
   }
+  else{
+    Serial.println("Writing data...");
+    mySensorData.println("test");  
+    mySensorData.close();  
+  }
+    
+  delay(sleepTime);
 }
 
 
@@ -125,11 +122,12 @@ bool testSdCard(){
   }
 }
 
+/*
 // print the type of card
 void getCardType(){
   
   Serial.println();
-  Serial.print("Card type:         ");
+  Serial.print("Card type: ");
   switch (card.type()) {
     case SD_CARD_TYPE_SD1:
       Serial.println("SD1");
@@ -143,5 +141,34 @@ void getCardType(){
     default:
       Serial.println("Unknown");
   }
+  
   Serial.println();
 }
+
+
+// print the type and size of the first FAT-type volume
+void getVolumeData(){
+
+  // Now we will try to open the 'volume'/'partition' - it should be FAT16 or FAT32
+  if (!volume.init(card)) {
+    Serial.println("Could not find FAT16/FAT32 partition.\nMake sure you've formatted the card");
+    while (1);
+  }
+  
+  Serial.print("Volume type is:    FAT");
+  Serial.println(volume.fatType(), DEC);
+
+  uint32_t volumesize;
+
+  volumesize = volume.blocksPerCluster();    // clusters are collections of blocks
+  volumesize *= volume.clusterCount();       // we'll have a lot of clusters
+  volumesize /= 2;                           // SD card blocks are always 512 bytes (2 blocks are 1KB)
+  Serial.print("Volume size (Kb):  ");
+  Serial.println(volumesize);
+  Serial.print("Volume size (Mb):  ");
+  volumesize /= 1024;
+  Serial.println(volumesize);
+  Serial.print("Volume size (Gb):  ");
+  Serial.println((float)volumesize / 1024.0); 
+}
+*/
