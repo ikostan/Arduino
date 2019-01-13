@@ -70,6 +70,7 @@ File mySensorData; //Data object you will write your sesnor data to
 Sd2Card card;
 SdVolume volume;
 SdFile root;
+bool isCardOk = false;
 
 void setup() {
   // put your setup code here, to run once:
@@ -80,6 +81,34 @@ void setup() {
 
   Serial.print("\nInitializing SD card...");
 
+  if(testSdCard()){
+    SD.begin(sd_cs); //Initialize the SD card reader
+    getCardType();
+  }
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  // Tests whether a file or directory exists on the SD card. 
+  if(testSdCard()){
+    mySensorData = SD.open(fileName, FILE_WRITE);
+
+    if(!mySensorData){
+      Serial.println("ERROR: SD card failure!");
+    }
+    else{
+      Serial.println("Writing data...");
+      mySensorData.println("test");                        //write pressure and end the line (println)
+      mySensorData.close();  
+    }
+    
+    delay(sleepTime);
+  }
+}
+
+
+bool testSdCard(){
+
   // we'll use the initialization code from the utility libraries
   // since we're just testing if the card is working!
   if (!card.init(SPI_HALF_SPEED, sd_cs)) {
@@ -89,30 +118,30 @@ void setup() {
     Serial.println("* did you change the chipSelect pin to match your shield or module?");
     Serial.println("\nPlease verify all the above and restart your device.");
     while (1);
+    return false;
   } else {
     Serial.println("Wiring is correct and a card is present.");
+    return true;
   }
-
-  SD.begin(sd_cs); //Initialize the SD card reader
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  // Tests whether a file or directory exists on the SD card. 
-  if(SD.exists(fileName)){
-    mySensorData = SD.open(fileName, FILE_WRITE);
-
-    if(!mySensorData){
-      Serial.println("ERROR: SD card failure!");
-    }
-    else{
-      mySensorData.println("test");                        //write pressure and end the line (println)
-      mySensorData.close();  
-    }
-  }
-  else{
-      Serial.println("ERROR: please enter SD card!");
-  }
+// print the type of card
+void getCardType(){
   
-  delay(sleepTime);
+  Serial.println();
+  Serial.print("Card type:         ");
+  switch (card.type()) {
+    case SD_CARD_TYPE_SD1:
+      Serial.println("SD1");
+      break;
+    case SD_CARD_TYPE_SD2:
+      Serial.println("SD2");
+      break;
+    case SD_CARD_TYPE_SDHC:
+      Serial.println("SDHC");
+      break;
+    default:
+      Serial.println("Unknown");
+  }
+  Serial.println();
 }
